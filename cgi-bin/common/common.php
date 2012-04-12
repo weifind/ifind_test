@@ -25,24 +25,28 @@ function &loadClass($class, $param = array()) {
  * 
  * @param $class 不带Static后缀
  */
-function &loadStatic($class) {
+function &loadStatic($class, $param = array()) {
 	static $_statics = array ();
 	if (isset ( $_statics ["$class"] )) {
 		return $_statics ["$class"];
 	}
-	
+	//Static Class后缀都接收
 	$classname = $class . 'Static';
 	if(!is_file(LIBRARIES_DIR . $classname . '.php')){
 		$classname = $class . 'Class';	
 	}
 	require LIBRARIES_DIR . $classname . '.php';
-	$_statics ["$class"] = new $classname(  );
+	if ($param === array () || empty ( $param )) {
+		$_statics ["$class"] = new $classname(  );
+	} else {
+		$_statics ["$class"] = new $classname( $param );
+	}
 	unset ( $classname );
 	
 	return $_statics ["$class"];
 }
 
-/**
+/*
  * 获取配置文件,config.php
  */
 function &getConfig($which = 'default') {
@@ -110,19 +114,19 @@ function _exception_handler($severity, $message, $filepath, $line) {
 /*
  * 移除url中非法字符
  */
-function removeInvalid($str, $url_encoded = TRUE) {
-	$non_displayables = array ();
+function removeInvalid($str, $urlEncoded = TRUE) {
+	$nonDisplayables = array ();
 	
-	if ($url_encoded) {
+	if ($urlEncoded) {
 		$non_displayables [] = '/%0[0-8bcef]/'; // 00-08, 11, 12, 14, 15
 		$non_displayables [] = '/%1[0-9a-f]/'; // 16-31
 	}
 	
-	$non_displayables [] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S'; // 00-08, 11,
+	$nonDisplayables [] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S'; // 00-08, 11,
 	                                                              // 12, 14-31, 127
 	
 	do {
-		$str = preg_replace ( $non_displayables, '', $str, - 1, $count );
+		$str = preg_replace ( $nonDisplayables, '', $str, - 1, $count );
 	} while ( $count );
 	
 	return $str;
@@ -166,13 +170,14 @@ function sizeConvert($filesize) {
 /**
  * php版本验证
  */
-function isPhp($version = '5.0.0') {
+function isPhp($version = '5.3.0') {
 	static $_isPhp;
 	$version = ( string ) $version;
 	
 	if (! isset ( $_isPhp [$version] )) {
-		$_isPhp [$version] = (version_compare ( PHP_VERSION, $version ) < 0) ? FALSE : TRUE;
+		$_isPhp [$version] = (version_compare ( PHP_VERSION, $version ) > 0) ? TRUE : FALSE;
 	}
 	
 	return $_isPhp [$version];
 }
+

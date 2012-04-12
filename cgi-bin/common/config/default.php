@@ -14,9 +14,10 @@ $config = array();
 //注意：类库函数中想获取本文件配置内容，需重新包含common.php的get_congig
 
 
-//cache是否开启，在display中传递
+//是否html缓存 目前没用，直接在display中设置display(,0 or 1)
+$config['cacheHtml'] = 1;
 //已定义全局变量
-$config['cachePath'] = CACHE_DIR;
+$config['cachePath'] = PROJECT_DIR . 'public/cache/';
 //单位:小时
 $config['cacheExpiration'] = 720;
 
