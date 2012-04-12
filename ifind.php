@@ -8,14 +8,19 @@ class Ifind
 	protected $config = array ();
 	// 输出内容
 	protected $output = '';
+	// 默认html缓存设置,display(,1)的参数能覆盖此设置
+	//protected $cacheHtml = 0;
 	// 缓存时间，单位：小时
 	protected $cacheExpiration = 1;
+	// 缓存路径
+	protected $cachePath = 'html/cache';
 	// assign传递的参数
 	protected $params = array ();
 	
 	public function __construct() {
 		$this->config = & getConfig ();
 		$this->cacheExpiration = $this->config ['cacheExpiration'];
+		$this->cachePath = $this->config['cachePath'];
 	}
 	
 	protected function assign($k, $v) {
@@ -23,15 +28,16 @@ class Ifind
 	}
 	
 	/**
+	 * 输出内容，页面静态化的选择
 	 * 注意，数据更新比较频繁的页面建议设置$cache=0
 	 *
 	 * 
 	 * @param string $view        	
-	 * @param $cache 1缓存，0不缓存，默认为1        	
+	 * @param $cache 1缓存，0不缓存，默认为0        	
 	 */
-	protected function display($view = '', $cache = 1) {
+	protected function display($view = '', $cache = 0) {
 		$viewname = VIEW_DIR . $view . '.php';
-		$cachename = CACHE_DIR . $view . '.html';
+		$cachename = $this->cachePath . $view . '.html';
 		// 缓存文件输出,缺少数据更新这一条件
 		// 什么时候更新？？？ 目前由用户控制是否缓存
 		if (is_file ( $cachename ) && $cache === 1) {
@@ -71,8 +77,9 @@ class Ifind
 	 * @param html文件内容 $view
 	 */
 	private function writeCache($view = '') {
-		$path = CACHE_DIR . $view . '.html';
+		$path = $this->cachePath . $view . '.html';
 		$cacheTime = '<!-- (' . time () . ') -->';
+		//file_put_contents代替常规fopen
 		file_put_contents ( $path, $cacheTime . $this->output );
 	}
 	
