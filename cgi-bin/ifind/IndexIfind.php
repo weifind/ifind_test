@@ -13,7 +13,8 @@ class IndexIfind extends Ifind
 		$this->assign('arr', $arr);
 		//display中自己控制是否缓存
 		$this->display('Indexindex',0);
-	}	
+	}
+		
 	/*
 	 * 
 	 */
@@ -24,13 +25,32 @@ class IndexIfind extends Ifind
 		//echo getenv('date');
 	}
 	
-	//捕捉url中脚本攻击
+	/*
+	 * 捕捉url中脚本攻击,例如
+	 * $_GET['a'] = <script>alert('a')</script>
+	 */
 	public function testSecurity(){
 		echo $_GET['a'];
 	}
 	
-	//测试正则
-	public function testPreg(){
+	//测试calendar
+	public function testCalendar(){
+		$calendar = & loadClass('Calendar');
+		echo $calendar->generate();
+	}
+	
+	//测试验证码
+	public function testCaptcha(){
+		//如果自行配置参数，此四个参数必须
+		$capt = array(
+				'height' => 25,
+				'width' => 80,
+				'length' => 5,
+				'expiration' => 60,
+				);
+		$captcha = & loadClass('Captcha');
+		$captcha->createCaptcha($capt);
+		
 	}
 	
 	/*
