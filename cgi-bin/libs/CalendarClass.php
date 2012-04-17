@@ -83,7 +83,7 @@ class CalendarClass
 				'friday' => 5,
 				'saturday' => 6 
 		);
-		$startDay = (! isset ( $startDays [$this->startDay] )) ? 0 : $startDays [$this->start_day];
+		$startDay = (! isset ( $startDays [$this->startDay] )) ? 0 : $startDays [$this->startDay];
 		
 		// Set the starting day number
 		$localDate = mktime ( 12, 0, 0, $month, 1, $year );

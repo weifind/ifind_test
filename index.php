@@ -90,7 +90,7 @@ unset($request);
 //这里进行数据过滤，处理。建议生产环境下启用
 //$Input = loadClass('Input',array('xss'=>TRUE,'csrf'=>FALSE));
 
-//不考虑控制器单一入口的情形
+//不考虑控制器单一入口的情形，而且控制器中也不该出现单一入口
 include CONTROLLER_DIR . $dir . $class . '.php';
 $instance = new $class ();
 $instance->$method ();

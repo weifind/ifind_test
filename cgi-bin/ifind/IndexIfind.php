@@ -1,7 +1,7 @@
 <?php
 if (! defined ( 'PROJECT_DIR' ))
 	exit ( 'No direct script access allowed' );
-//ci yii zend framework
+
 class IndexIfind extends Ifind
 {
 	//测试基本功能+cache功能

@@ -80,6 +80,7 @@ class Ifind
 		$path = $this->cachePath . $view . '.html';
 		$cacheTime = '<!-- (' . time () . ') -->';
 		//file_put_contents代替常规fopen
+		//第三个参数自行选择，是否独占锁定
 		file_put_contents ( $path, $cacheTime . $this->output );
 	}
 	

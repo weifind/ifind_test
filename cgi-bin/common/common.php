@@ -27,8 +27,8 @@ function &loadClass($class, $param = array()) {
  */
 function &loadStatic($class, $param = array()) {
 	static $_statics = array ();
-	if (isset ( $_statics ["$class"] )) {
-		return $_statics ["$class"];
+	if (isset ( $_statics [$class] )) {
+		return $_statics [$class];
 	}
 	//Static Class后缀都接收
 	$classname = $class . 'Static';
@@ -86,8 +86,6 @@ function show_error($message, $heading = 'An Error Was Encountered') {
  * 日志记录
  */
 function log_message($level = 'error', $message) {
-	static $_log;
-	
 	$_log = & loadStatic ( 'Log' );
 	$_log->writeLog ( $level, $message );
 }
