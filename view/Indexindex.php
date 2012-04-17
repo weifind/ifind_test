@@ -1,89 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
-
-	<style type="text/css">
-
-	::selection{ background-color: #E13300; color: white; }
-	::moz-selection{ background-color: #E13300; color: white; }
-	::webkit-selection{ background-color: #E13300; color: white; }
-
-	body {
-		background-color: #fff;
-		margin: 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
-
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-	}
-
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
-
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
-
-	#body{
-		margin: 0 15px 0 15px;
-	}
-	
-	p.footer{
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
-	
-	#container{
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		-webkit-box-shadow: 0 0 8px #D0D0D0;
-	}
-	</style>
+<title>welcome to ifind framework!</title>
+<link rel="stylesheet" href="/public/css/rightmenu2.css" type="text/css" />
 </head>
 <body>
-
-<div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
-
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
-
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-		<p><select>{{$arr}}</select></p>
+	<div id="header">
+		<h1>ifind framework</h1>
 	</div>
-
-	<p class="footer">Page rendered in <strong>0.001</strong> seconds</p>
-</div>
-
+	<div class="colmask">
+		<div class="collleft">
+			<!-- main menu -->
+			<div class="col1">
+				<p>
+					this is simple framework of PHP.<br /> the sae address:<a
+						href="http://weifind.sinaapp.com" target="_blank">sae_weifind</a><br />
+					the git address:<a href="https://github.com/weifind/ifind_test"
+						target="_blank">git_weifind</a><br /> for the code,there are some
+					differences between in sae and git,if you have used sae,you should
+					know that.<br /> for example,<br />
+				</p>
+				<ul>
+					<li>there is no IO:
+						<ul>
+							<li>the html template storage in memcache.<br /></li>
+							<li>avatar/upload file/other Persistent storaged file,saved in
+								storage.<br />
+							</li>
+							<li>session also can saved in many place,like
+								database/memcache,but not harddisk.<br />
+							</li>
+							<li>log is important,we can use sae_debug() and
+								sae_set_display_errors().<br />
+							</li>
+						</ul>
+					</li>
+					<li>continued...</li>
+				</ul>
+				for now,you can testing by:<br />
+				<ul>
+					<li><a href="http://weifind.sinaapp.com/index/testsecurity/xss/{$xss}"
+						target="_blank">testSecurity</a>
+					<code>http://weifind.sinaapp.com/index/testsecurity/xss/< script >alert('xss')< /script ></code></li>
+					<li><a href="http://weifind.sinaapp.com/index/testcalendar"
+						target="_blank">testCalendar</a><code>http://weifind.sinaapp.com/index/testcalendar</code></li>
+					<li><a href="http://weifind.sinaapp.com/index/testcaptcha"
+						target="_blank">testCaptcha</a><code>http://weifind.sinaapp.com/index/testcaptcha</code></li>
+					<li>more...</li>
+				</ul>
+				if you are interested in it(small framework),you can read the <a
+					href="https://github.com/weifind/ifind_test" target="_blank">source
+					code</a>. <br />
+			</div>
+			<!-- right menu -->
+			<div class="col2">
+				<div class="rightmenu">app for testing</div>
+				
+				</p>
+			</div>
+		</div>
+	</div>
+	<div id="footer">&copy; 2012&nbsp;supported by <a href="http://ifind.cc/">ifind</a></div>
 </body>
 </html>

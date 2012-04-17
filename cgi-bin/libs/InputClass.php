@@ -32,7 +32,7 @@ class InputClass
 			$this->enableCsrf = $enable['csrf'];
 		}
 		if($this->enableXss === TRUE){
-			$this->security = &loadClass('Security');
+			$this->security = &loadStatic('Security');
 		}
 		$this->sanitizeGlobal();
 	}

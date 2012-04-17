@@ -35,7 +35,11 @@ class Ifind
 	 * @param string $view        	
 	 * @param $cache 1缓存，0不缓存，默认为0        	
 	 */
-	protected function display($view = '', $cache = 0) {
+	public function display($view = '',$cache = 0){
+		echo $this->_display($view,$cache);
+		exit;
+	}
+	protected function _display($view = '', $cache = 0) {
 		$viewname = VIEW_DIR . $view . '.php';
 		$cachename = $this->cachePath . $view . '.html';
 		// 缓存文件输出,缺少数据更新这一条件
@@ -49,21 +53,16 @@ class Ifind
 					chmod ( $cachename, '0777' );
 					unlink ( $cachename );
 				} else {
-					$this->displayCache ( $cachename );
+					return $this->str_replace ( '<!-- \(([0-9]*)\) -->', '', $output );
 				}
-			} else {
-				$this->displayCache ( $cachename );
-			}
+			} 
 		}
 		$this->output = file_get_contents ( $viewname );
 		$this->parseContent ();
 		if ($cache === 1) {
 			$this->writeCache ( $view );
-		} else if (is_file ( $cachename )) {
-			unlink ( $cachename );
-		}
-		echo $this->output;
-		exit ();
+		} 
+		return $this->output;
 		/*
 		 * 引入正则解析功能后使用
 		 * 如何解析？？？ 除了正则替换之外的方法？ {foreach b ob_start(); echo $this->params;
@@ -83,17 +82,7 @@ class Ifind
 		//第三个参数自行选择，是否独占锁定
 		file_put_contents ( $path, $cacheTime . $this->output );
 	}
-	
-	/**
-	 * 默认缓存
-	 * 
-	 */
-	private function displayCache($file) {
-		$content = file_get_contents ( $file );
-		echo str_replace ( '<!-- \(([0-9]*)\) -->', '', $content );
-		exit ();
-	}
-	
+
 	/**
 	 * parseContent
 	 * $a = 'a'
@@ -102,7 +91,7 @@ class Ifind
 	 */
 	private function parseContent() {
 		foreach ( $this->params as $k => $v ) {
-			$this->output = str_replace ( '{{$' . $k . '}}', $v, $this->output );
+			$this->output = str_replace ( '{$' . $k . '}', $v, $this->output );
 		}
 		// str_replace($search, $replace, $subject)
 	}
